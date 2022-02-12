@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 
 const router = express.Router();
-const upload = ''
+const upload = require('../config/storage.config')
 
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');

@@ -24,8 +24,31 @@ const userSchema = new mongoose.Schema({
   },
   googleID: {
     type: String
+  },
+  image: {
+    type: String,
+    default: '',
   }
 });
+
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  if (user.isModified('password')) {
+    bcrypt.hash(user.password, SALT_ROUNDS)
+      .then((hash) => {
+        user.password = hash
+        next()
+      })
+      .catch(err => next(err))
+  } else {
+    next()
+  }
+})
+
+userSchema.methods.checkPassword = function(password) {
+  return bcrypt.compare(password, this.password)
+}
 
 const User = mongoose.model('User', userSchema);
 
