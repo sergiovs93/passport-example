@@ -5,7 +5,7 @@ const EMAIL_PATTERN = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+
 const PASSWORD_PATTERN = /^.{8,}$/i;
 const SALT_ROUNDS = 10;
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: 'name is required',
@@ -22,6 +22,9 @@ const userSchema = new Schema({
     required: 'password is required',
     match: [PASSWORD_PATTERN, 'password needs at least 8 chars'],
   },
+  googleID: {
+    type: String
+  }
 });
 
 const User = mongoose.model('User', userSchema);
