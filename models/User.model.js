@@ -46,10 +46,10 @@ userSchema.pre('save', function(next) {
   }
 })
 
-userSchema.methods.checkPassword = function(password) {
+ userSchema.methods.checkPassword = function(password) {
   return bcrypt.compare(password, this.password)
 }
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema); 
 
 module.exports = User;
